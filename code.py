@@ -29,17 +29,17 @@ out = data_noheader[:,21] != ''
 print('Delivery number when a given player got out : ',data_noheader[out][:,11], 
 '& wicket type  :',data_noheader[out][:,21])
 # Number of times Mumbai Indians won the toss
-print('Number of matchess Mumbai Indians have won the toss :',data_noheader[data_noheader[:,5] == 'Mumbai Indians'][:,0].size)
+print('Number of matchess Mumbai Indians have won the toss :',np.unique(data_noheader[data_noheader[:,5] == 'Mumbai Indians'][:,0]).size)
  # this exercise will help you get the statistics on one particular team
 
 # Filter record where batsman scored six and player with most number of sixex
 
  # An exercise to know who is the most aggresive player or maybe the scoring player 
 six = data_noheader[:,16].astype(np.int) == 6
-batsmen_six = data_noheader[six][:,13]
-batsmen_six_count = np.array(np.unique(batsmen_six, return_counts=True)).T
-max_num_six = np.amax(batsmen_six_count[:,1].astype(np.int))
-print('Batsmen who scored max number of sixes: ',batsmen_six_count[batsmen_six_count[:,1].astype(np.int) == max_num_six][:,0])
+d1 = dict(Counter(data_noheader[six][:,13]))
+highest=max(d1.values())
+print('Batsmen who scored max number of sixes: ',[k for k, v in d1.items() if v == highest])
+
 
 
 
